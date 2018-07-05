@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="cropper.css">
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .box{
+            height:390px;
+        }
+        .small{
+            width:100px;
+            height:100px;
+            border:1px solid red;
+            overflow: hidden;
+        }
+        canvas{
+            width:150px;
+            height:150px;
+            border:1px solid green;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <img id="image" src="images/picture.jpg">
+</div>
+<div class="cavans"></div>
+<div class="small" ></div>
+<button id="reset">重置裁剪框</button>
+<button id="clear">清除裁剪框</button>
+<button id="replace">重新构建</button>
+<button id="disable">锁定裁剪框</button>
+<button id="enable">解锁裁剪框</button>
+<button id="distroy">销毁cropper</button>
+<button id="move">移动图片</button>
+<button id="getData">输出裁剪区域数据</button>
+<button id="setData">设置裁剪区域数据</button>
+<button id="getContainerData">输出container 容器大小数据</button>
+<button id="getImageData">输出图像image位置、大小和其他相关数据</button>
+<button id="getCanvasData">输出画布Canvas(图像包装器)位置和大小数据</button>
+<button id="setCanvasData">使用数据更改画布Canvas(图像包装器)位置和大小</button>
+<button id="getCropBoxData">输出剪切框的位置和大小数据。</button>
+<button id="setCropBoxData">改变剪切框的位置和大小数据</button>
+<button id="getCroppedCanvas">画一张剪裁的图片</button>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="cropper.js"></script>
+<script>
+    $('#image').cropper({
+        aspectRatio: 1,
+        viewMode:1,
+        dragMode:'move',
+        preview:'.small',
+        responsive:true,
+        restore:true,
+        modal:true,
+        highlight:false,//highlight–在裁剪框上方显示白色的区域(突出裁剪框)。
+        center:true,//初始化裁剪框在图片的正中心
+        checkCrossOrigin:true,
+        autoCropArea:1,//当初始化时，自动定义自动裁剪面积大小(百分比)和图片进行对比。
+        autoCrop:true,//当初始化时，可以自动生成图像。（就是自动显示裁剪框，改成false裁剪框自动消失）
+        background:false,//设置是否有网格
+        rotatable:true,//是否允许旋转图像。
+        scalable:true,//是否可以缩放图像
+        zoomable:true,//是否可以放大图像
+        zoomOnWheel:true,//是否可以通过移动鼠标来放大图像。
+        zoomOnTouch:true,//是否可以通过拖动触摸来放大图像。
+        wheelZoomRatio:0.1,//用鼠标移动图像时，定义缩放比例。
+        movable:false,//定义是否可以移动后面的图片
+        toggleDragModeOnDblclick:true,//当点击两次时可以在“crop”和“move”之间切换拖拽模式，
+        cropBoxMovable:true,//是否通过拖拽来移动剪裁框。
+        cropBoxResizable:true,//是否通过拖动来调整剪裁框的大小。
+        minContainerWidth:200,//容器的最小宽度。
+        minContainerHeight:200,//容器的最小高度。
+        crop: function (e) {
+            /*console.log(e);*/
+        },
+        ready:function(){
+            $(this).cropper('crop');
+            $("#reset").on("click", function () {//重置初始化位置
+                $('#image').cropper('reset');
+            })
+            $("#clear").on("click", function () {//清除裁切框
+                $('#image').cropper('clear');
+            })
+            $("#replace").on("click", function () {// replace(url[, onlyColorChanged])—替换图像的src并重新构建cropper
+                $('#image').cropper('replace',"../images/111.png",true );
+            })
+            $("#disable").on("click", function () {//锁定裁剪框（裁切框不可移动）（与enable相对应）
+                $('#image').cropper('disable');
+            })
+            $("#enable").on("click", function () {//解锁，锁定的裁切框（与disable相对应）
+                $('#image').cropper('enable');
+            })
+            $("#destroy").on("click", function () {//销毁cropper并从图像中删除整个cropper。
+                $('#image').cropper('destroy');
+            })
+            $("#move").on("click", function () {
+                $('#image').cropper('move', 1,0);
+            })
+            $("#getData").on("click", function () {
+                console.log($('#image').cropper('getData', true));
+                /**getData([rounded])—-输出最终裁剪的区域位置和大小数据(根据原始图像的自然大小
+                 *rounded 类型：Boolean 默认：false；设置true可以获取其所有数据；
+                 返回的数据类型：Object；
+                 - x裁切框距离左边的距离
+                 - y裁切框距离顶部的距离
+                 - width裁切框的宽度
+                 - height裁切框的高度
+                 - rotate裁切框的旋转的角度
+                 - scaleX缩放图像的横坐标
+                 - scaleY缩放图像的纵坐标
+                 * */
+            });
+            $("#setData").on("click", function () {
+                $('#image').cropper('setData',{width:200,height:100});
+            })
+            $("#getContainerData").on("click", function () {
+                console.log($('#image').cropper('getContainerData'));
+            })
+            $("#getImageData").on("click", function () {
+                console.log($('#image').cropper('getImageData'));
+            })
+            $("#getCanvasData").on("click", function () {//输出画布Canvas(图像包装器)位置和大小数据
+                console.log($('#image').cropper('getImageData'));
+            })
+            $("#setCanvasData").on("click", function () {
+                $('#image').cropper('setCanvasData',{width:200,height:100});
+            })
+            $("#getCropBoxData").on("click", function () {//输出剪切框的位置和大小数据。
+                console.log($('#image').cropper('getCropBoxData'));
+            })
+            $("#setCropBoxData").on("click", function () {
+                $('#image').cropper('setCropBoxData',{width:200,height:100});
+            })
+            $("#getCroppedCanvas").on("click", function () {//画一张裁剪图片
+                //$('#image').cropper('getCroppedCanvas')生成一张以裁剪区域naturalWidth为宽高的画布
+                console.log($('#image').cropper('getCroppedCanvas'));
+                var cas=$('#image').cropper('getCroppedCanvas');
+                var base64url=cas.toDataURL('image/jpeg');
+                cas.toBlob(function (e) {
+                    console.log(e);  //生成Blob的图片格式
+                })
+                console.log(base64url); //生成base64图片的格式
+                $('.cavans').html(cas)  //在body显示出canvas元素
+            })
+            /**
+             * 设置canvas 的图片大小，从而达到压缩图片的效果
+            $('#image').cropper('getCroppedCanvas', {
+                width: 160,
+                height: 90,
+                minWidth: 256,
+                minHeight: 256,
+                maxWidth: 4096,
+                maxHeight: 4096,
+                fillColor: '#fff',
+                imageSmoothingEnabled: false,
+                imageSmoothingQuality: 'high',
+            });*/
+            /**Upload cropped image to server if the browser supports `HTMLCanvasElement.toBlob`
+             *  上句话的意思是上传cropped 图片到服务器 如果浏览器支持HTMLCanvasElement.toBlob的话2
+             * 下面例子对应这一块，上传图片把canvas 转成jpeg 格式上传
+             *    cas.toBlob(function (e) {
+                    console.log(e);  //生成Blob的图片格式
+                })
+               $('#image').cropper('getCroppedCanvas').toBlob(function (blob) {
+                var formData = new FormData();
+                formData.append('croppedImage', blob);
+                $.ajax('/path/to/upload', {
+                    method: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                        console.log('Upload success');
+                    },
+                    error: function () {
+                        console.log('Upload error');
+                    }
+                });
+            });*/
+        }
+    });
+
+</script>
+</body>
+</html>
