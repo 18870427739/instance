@@ -5,6 +5,6 @@
 .idea
 *.iml
 out
-gen
-/cropper/images/111.png
+/.gitignore
 /cropper/crop.html
+package.json
