@@ -14,22 +14,22 @@
 <div id="output"></div>
 <script type="text/javascript">
     (function() {
-        var video, output;
-        var scale = 0.8;
-        var initialize = function() {
+        let video, output;
+        const scale = 0.8;
+        const initialize = function() {
             output = document.getElementById("output");
             video = document.getElementById("video");
-         /*   video.addEventListener('loadeddata',function(e){
-                alert(e)
+            /* video.addEventListener('loadeddata',function(e){
+               alert(e)
             });*/
             video.addEventListener('loadeddata', captureImage);
-        };
-        var captureImage = function() {
-            var canvas = document.createElement("canvas");
+             };
+            const captureImage = function() {
+            const canvas = document.createElement("canvas");
             canvas.width = video.videoWidth * scale;
             canvas.height = video.videoHeight * scale;
             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-          /* var img =new Image();
+            /* var img =new Image();
             img.src = canvas.toDataURL("image/png");
             img.width = 400;
             img.height = 300;*/
