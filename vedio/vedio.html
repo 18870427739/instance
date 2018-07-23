@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+<body>
+<video id="video" controls="controls" width="400" height="300">
+    <source src="https://www.w3cschool.cn/statics/demosource/movie.mp4">
+</video>
+<br>
+<br> 视频第一帧图片：
+<div id="output"></div>
+<script type="text/javascript">
+    (function() {
+        var video, output;
+        var scale = 0.8;
+        var initialize = function() {
+            output = document.getElementById("output");
+            video = document.getElementById("video");
+         /*   video.addEventListener('loadeddata',function(e){
+                alert(e)
+            });*/
+            video.addEventListener('loadeddata', captureImage);
+        };
+        var captureImage = function() {
+            var canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth * scale;
+            canvas.height = video.videoHeight * scale;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+          /* var img =new Image();
+            img.src = canvas.toDataURL("image/png");
+            img.width = 400;
+            img.height = 300;*/
+             alert('fun');
+            output.appendChild(canvas);
+        };
+        initialize();
+    })();
+</script>
+</body>
+</html>

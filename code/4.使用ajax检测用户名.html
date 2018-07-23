@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>用户注册</h2>
+    <form action="/signin" method="post">
+        <ul>
+            <li>
+                <label for="">用户名：</label>
+                <input type="text" name="username" id="user">
+                <span id="msg"></span>
+            </li>
+            <li><label for="">密码：</label><input type="password" name="pwd"></li>
+            <li><label for=""></label><input type="submit" value="注册"></li>
+        </ul>
+    </form>
+
+    <script>
+        //获取用户名文本看框
+        var user = document.getElementById('user');
+        //注册blur事件，利用xhr发送请求并接受响应
+        user.onblur = function(){
+            //第一步，创建对象
+//var xhr = new XMLHttpRequest();
+//            var xhr = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+            var xhr = createXhr();
+            //第二步，连接服务器
+            var url = "/signin?username="+ encodeURIComponent(this.value);
+//            xhr.open('get',url);
+            //使用post的方式来提交
+            xhr.open('post','/signin');
+            //设置以表单的方式来提交数据
+            xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            //第三步，监听状态的变化
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState == 4 && xhr.status == 200 ) {
+                    //说明响应成功的返回了
+                    var res = xhr.responseText;
+                    document.getElementById('msg').innerHTML = res;
+                }
+            }
+            //第四步，发送请求
+            var data = "username="+ encodeURIComponent(this.value);
+            xhr.send(data);
+        }
+
+        //创建xhr对象方法
+        //能力检测
+//        function createXhr(){
+//            var xhr = null;
+//            if (window.XMLHttpRequest){
+//                xhr = new XMLHttpRequest();
+//            } else {
+//                xhr =  new ActiveXObject("MSXML2.XMLHTTP.3.0");
+//            }
+//            return xhr;
+//        }
+
+        //try...catch的方式
+        function createXhr(){
+            var xhr = null;
+            try{
+                xhr = new XMLHttpRequest();
+            } catch (e) {
+                try {
+                    xhr = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+                } catch (e1){
+                    xhr = false;
+                }
+            }
+            return xhr;
+        }
+    </script>
+</body>
+</html>

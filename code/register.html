@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>用户注册</h2>
+    <form action="/signin" method="post">
+        <ul>
+            <li>
+                <label for="">用户名：</label>
+                <input type="text" name="username" id="user">
+                <span id="msg"></span>
+            </li>
+            <li><label for="">密码：</label><input type="password" name="pwd"></li>
+            <li><label for=""></label><input type="submit" value="注册"></li>
+        </ul>
+    </form>
+
+    <iframe src="" frameborder="0" width="0" height="0" id="ifr"></iframe>
+
+    <script>
+        //获取文本框
+        var user = document.getElementById('user');
+        //获取iframe
+        var ifr = document.getElementById('ifr');
+        //对文本框注册一个blur事件
+        user.onblur = function(){
+            //借助ifr发出请求，具体来说，就是设置ifr的src属性
+            ifr.src = '/signin?username='+this.value;
+        }
+    </script>
+</body>
+</html>
