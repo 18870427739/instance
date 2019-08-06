@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <script src="https://imgcache.qq.com/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js" charset="utf-8"></script>
@@ -17,20 +17,33 @@
     //var vid = 't0508alameb';
     var vid = 'n0660sjputv';
     function play_video () {
-        var video , player, playStatus = 'pending';
-
+        var video ,
+            player,
+            playStatus = 'pending';
         var elId = 'mod_player_skin_0';
         $("#js_content").html('<div id="' + elId + '" class="player_skin" style="padding-top:6px;"></div>');
         var elWidth = $("#js_content").width();
+        console.log(elWidth);
         playVideo(vid, elId, elWidth);
     }
     function playVideo(vid, elId, elWidth) {
         video = new tvp.VideoInfo();
+        // var player = new tvp.Player(750, 450);//视频高宽
+        // video.setVid("q0011iyvdam");//视频vid
         video.setVid(vid);
         player = new tvp.Player(elWidth, 200);
-        player.setCurVideo(video);
+        //设置播放器初始化时加载的视频
+        player.addParam("autoplay","0");//是否自动播放，1为自动播放，0为不自动播放
+
+         player.addParam("showend",0);
+         player.addParam("adplay",0);
+        /* */
+           player.setCurVideo(video);
+        //player.addParam("wmode","opaque");
         player.addParam("wmode", "transparent");
-        player.addParam("pic", tvp.common.getVideoSnapMobile(vid));
+        //  player.addParam("pic","http://ossweb-img.qq.com/images/roco/act/a20120925movie/video_pic.jpg");//默认图片地址
+       // player.addParam("flashskin", "http://imgcache.qq.com/minivideo_v1/vd/res/skins/TencentPlayerMiniSkin.swf");//是否调用精简皮肤，不使用则删掉此行代码
+        player.addParam("pic", tvp.common.getVideoSnapMobile(vid));//设置初始覆盖图，这样默认截取第一帧图片；
         player.write(elId);
     }
 
