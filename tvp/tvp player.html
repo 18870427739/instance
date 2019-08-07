@@ -6,39 +6,38 @@
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <script src="https://imgcache.qq.com/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js" charset="utf-8"></script>
+    <script src="js/jweixin-1.0.0.js"></script>
+    <script src="js/main.js"></script>
     <title></title>
 </head>
 <body>
 <div class="rich_media_content" id="js_content">
-
-</div>
-
 <script type="text/javascript">
-    //var vid = 't0508alameb';
-    var vid = 'n0660sjputv';
+    var vid = 't0508alameb';
+    //var vid = 'n0660sjputv';
     function play_video () {
         var video ,
             player,
             playStatus = 'pending';
         var elId = 'mod_player_skin_0';
-        $("#js_content").html('<div id="' + elId + '" class="player_skin" style="padding-top:6px;"></div>');
+        $("#js_content").html('<div id="' + elId + '" class="player_skin"></div>');
         var elWidth = $("#js_content").width();
-        console.log(elWidth);
         playVideo(vid, elId, elWidth);
     }
     function playVideo(vid, elId, elWidth) {
         video = new tvp.VideoInfo();
         // var player = new tvp.Player(750, 450);//视频高宽
         // video.setVid("q0011iyvdam");//视频vid
-        video.setVid(vid);
-        player = new tvp.Player(elWidth, 200);
-        //设置播放器初始化时加载的视频
-        player.addParam("autoplay","0");//是否自动播放，1为自动播放，0为不自动播放
+        // var player = new tvp.Player(750, 450);//视频高宽
+        video.setVid(vid) //设置视频 vid,此方法会在设置视频id 的同时会将视频对象的其他信息还原。
+         // video.setTitle('zepto player')//设置视频标题；
+         //设置播放器初始化时加载的视频
+         player.addParam("autoplay","0");//是否自动播放，1为自动播放，0为不自动播放
 
          player.addParam("showend",0);
          player.addParam("adplay",0);
         /* */
-           player.setCurVideo(video);
+        player.setCurVideo(video);
         //player.addParam("wmode","opaque");
         player.addParam("wmode", "transparent");
         //  player.addParam("pic","http://ossweb-img.qq.com/images/roco/act/a20120925movie/video_pic.jpg");//默认图片地址

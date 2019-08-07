@@ -1847,6 +1847,7 @@ tvp.Html5Player = function (vWidth, vHeight) {
     };
 
     function setCurrentTime(v) {
+        console.log(v)
         if (isNaN(v))
             return;
         try {
